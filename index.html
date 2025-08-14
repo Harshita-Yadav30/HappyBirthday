@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Papa</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 10px 20px 5px 20px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #d9534f;
+            animation: bounce 1.5s infinite;
+        }
+
+        #ageDays {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: -10px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .photos {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px;
+            overflow: hidden;
+        }
+
+        .photos div {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .photos div img,
+        .photos div video {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .photos div img:hover,
+        .photos div video:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .photos div {
+                max-width: 30%;
+            }
+            .photos div img,
+            .photos div video {
+                height: 250px;
+            }
+            header h1 {
+                font-size: 1.68rem;
+            }
+        }
+
+        .message {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="margin-bottom: 0;">🎉 Happy Birthday, Papa! 🎂</h1>
+        <h2 id="ageDays" style="margin-top: 0;"></h2>
+    </header>
+
+    <section class="photos" id="memories">
+        <div id="card1"></div>
+        <div id="card2"></div>
+        <div id="card3"></div>
+    </section>
+
+    <section class="message">
+        <p>
+            Happppyyyyy Birthdayyyyyyyy!!!!!!!!✨✨
+            <br/><br/>
+            You've always been my biggest cheerleader and supporter throughout! Thank you for everything you have done. You deserve the world! Enjoy your day!!
+            <br/><br/>
+            Love you❤️  
+        </p>
+    </section>
+
+    <footer>
+        Made with ❤️
+    </footer>
+
+    <script>
+        const birthDate = new Date("1976-08-15");
+        const today = new Date();
+        const diffTime = today - birthDate;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        document.getElementById("ageDays").textContent = `🎈${diffDays.toLocaleString()} days young today!🎈`;
+
+        let curr = 0;
+        const memories = [
+            "1.jpeg","2.jpeg","3.mp4","4.jpeg","5.jpeg","6.mp4","7.jpeg","8.jpeg","9.jpeg","10.jpeg",
+            "11.jpeg","12.jpeg","13.jpeg","14.jpeg","15.jpeg","16.jpeg","17.jpeg","18.mp4","19.jpeg","20.jpeg",
+            "21.jpeg","22.jpeg","23.jpeg"
+        ];
+
+        const loadMedia = (element, mediaName) => {
+            const card = document.getElementById(element);
+            card.innerHTML = "";
+
+            if (mediaName.endsWith(".mp4")) {
+                const vid = document.createElement("video");
+                vid.src = mediaName;
+                vid.autoplay = true;
+                vid.loop = true;
+                vid.muted = true;
+                vid.playsInline = true;
+                card.appendChild(vid);
+            } else {
+                const img = document.createElement("img");
+                img.src = mediaName;
+                card.appendChild(img);
+            }
+        };
+
+        const carousel = () => {
+            loadMedia("card1", memories[curr]);
+            loadMedia("card2", memories[(curr + 1) % memories.length]);
+            loadMedia("card3", memories[(curr + 2) % memories.length]);
+            curr = (curr + 1) % memories.length;
+        };
+
+        carousel();
+        setInterval(carousel, 2000);
+    </script>
+</body>
+</html>
