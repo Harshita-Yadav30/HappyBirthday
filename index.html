@@ -63,19 +63,6 @@
             transform: scale(1.05);
         }
 
-        @media (max-width: 768px) {
-            .photos div {
-                max-width: 30%;
-            }
-            .photos div img,
-            .photos div video {
-                height: 250px;
-            }
-            header h1 {
-                font-size: 1.68rem;
-            }
-        }
-
         .message {
             max-width: 700px;
             margin: auto;
@@ -91,6 +78,22 @@
             padding: 15px;
             font-size: 0.9rem;
             background: rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .photos div {
+                max-width: 30%;
+            }
+            .photos div img,
+            .photos div video {
+                height: 250px;
+            }
+            header h1 {
+                font-size: 1.68rem;
+            }
+            .message {
+                margin: auto 1.2rem;
+            }
         }
     </style>
 </head>
